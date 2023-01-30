@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="GivePenny.GherkinSpec.TestAdapter" Version="3.0.6" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+        <PackageReference Include="SpecFlow.MSTest" Version="3.9.74" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GherkinSpec.SpecFlowBindingsExample\GherkinSpec.SpecFlowBindingsExample.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Features/**/*.feature.cs" />
+    </ItemGroup>
+
+    <Target Name="DeleteSpecFlowCodeGeneratedFiles" AfterTargets="Build">
+        <ItemGroup>
+            <FilesToDelete Include="Features/**/*.feature.cs" />
+        </ItemGroup>
+        <Message Text="Deleting @(FilesToDelete)" />
+        <Delete Files="@(FilesToDelete)" />
+    </Target>
+
+</Project>
